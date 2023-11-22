@@ -9,11 +9,23 @@ ENV_FILE_NAME = '.env'
 # models/custombase
 CREATE_DATE_DEFAULT = datetime.utcnow
 CLOSE_DATE_DEFAULT = None
-
 # models/wish
 WISH_NAME_MAX_LEN = 100
 COMPLETED_DEFAULT = False
 RESERVED_DEFAULT = False
-
 # models/reservation
 WISH_ID_FOREIGN_KEY = 'wish.id'
+
+# schemas/wish
+WISH_NAME_MIN_LEN = 1
+WISH_NAME_MAX_LEN = 100
+COMMENT_MIN_LEN = 1
+CREATE_DATE = datetime.now().isoformat(timespec='seconds')
+
+# api/validators
+NAME_DUPLICATE_EXCEPTION = 'Пожелание с таким названием уже существует!'
+WISH_NOT_EXISTS_EXCEPTION = 'Пожелание не найдено!'
+
+# api/routers
+WISH_ROUTER_PREFIX = '/wishes'
+WISH_ROUTER_TAG = 'Wishes'
