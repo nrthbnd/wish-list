@@ -25,7 +25,11 @@ CREATE_DATE = datetime.now().isoformat(timespec='seconds')
 # api/validators
 NAME_DUPLICATE_EXCEPTION = 'Пожелание с таким названием уже существует!'
 WISH_NOT_EXISTS_EXCEPTION = 'Пожелание не найдено!'
+WISH_ALREADY_RESERVED = 'Это пожелание уже забронировано!'
+WISH_ALREADY_COMPLETED = 'Это пожелание уже выполнено!'
 
 # api/routers
 WISH_ROUTER_PREFIX = '/wishes'
 WISH_ROUTER_TAG = 'Wishes'
+RES_ROUTER_PREFIX = '/reservations'
+RES_ROUTER_TAG = 'Reservations'
