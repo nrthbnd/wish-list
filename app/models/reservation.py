@@ -8,6 +8,7 @@ class Reservation(CustomBase):
     """Модель бронирования пожелания."""
     wish_id = Column(
         Integer,
-        ForeignKey(WISH_ID_FOREIGN_KEY)
+        ForeignKey(WISH_ID_FOREIGN_KEY),
+        unique=True,
     )
     # user_id = Column(Integer, ForeignKey('user.id'))
