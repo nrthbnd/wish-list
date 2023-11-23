@@ -5,7 +5,7 @@ from pydantic import BaseModel, Extra, Field, validator
 
 from constants import (
     WISH_NAME_MIN_LEN, WISH_NAME_MAX_LEN,
-    COMMENT_MIN_LEN, CREATE_DATE,
+    CREATE_DATE,
 )
 
 
@@ -18,7 +18,6 @@ class WishBase(BaseModel):
     )
     comment: Optional[str] = Field(
         None,
-        min_length=COMMENT_MIN_LEN
     )
 
     class Config:
@@ -27,7 +26,7 @@ class WishBase(BaseModel):
 
 class WishCreate(WishBase):
     """Схема для создания пожелания."""
-    name: Optional[str] = Field(
+    name: str = Field(
         ...,
         min_length=WISH_NAME_MIN_LEN,
         max_length=WISH_NAME_MAX_LEN,
