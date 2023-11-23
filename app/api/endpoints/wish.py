@@ -18,7 +18,7 @@ router = APIRouter()
     # dependencies=[Depends(current_user)],
     response_model_exclude_none=True,
 )
-async def create_new_project(
+async def create_new_wish(
     wish: WishCreate,
     session: AsyncSession = Depends(get_async_session),
 ):
