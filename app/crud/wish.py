@@ -32,7 +32,7 @@ class CRUDWish(CRUDBase):
         """Получить пожелание по id."""
         db_wish = await session.execute(
             select(Wish).where(
-                Wish.id == wish_id
+                Wish.id == wish_id,
             )
         )
         return db_wish.scalars().first()
