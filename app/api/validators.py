@@ -2,10 +2,10 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from constants import (
-    NAME_DUPLICATE_EXCEPTION, WISH_NOT_EXISTS_EXCEPTION,
-    WISH_ALREADY_RESERVED, WISH_ALREADY_COMPLETED,
-)
+from constants import (NAME_DUPLICATE_EXCEPTION,
+                       WISH_ALREADY_RESERVED, WISH_ALREADY_COMPLETED,
+                       NOT_ALLOWED_TO_DELETE_WISH, SWITCH_FIELD_COMPLETED,
+                       SWITCH_FIELD_RESERVED)
 from app.crud.wish import wish_crud
 from app.models import Wish, Reservation
 
@@ -25,20 +25,36 @@ async def check_name_duplicate(
         )
 
 
-async def check_wish_exists(
+async def check_before_delete(
         wish_id: int,
         session: AsyncSession,
-) -> Wish:
-    """Проверить, существует ли пожелание по id."""
-    wish = await wish_crud.get_wish_by_id(
-        wish_id, session,
+):
+    """Проверить, можено ли удалять пожелание."""
+    wish = await wish_crud.get(wish_id, session)
+    if wish.reserved is True:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=NOT_ALLOWED_TO_DELETE_WISH,
+        )
+
+
+async def check_obj_exists(
+        obj_id: int,
+        model_crud,
+        exception: str,
+        session: AsyncSession,
+):
+    """Проверить, существует ли объект по id."""
+    obj = await model_crud.get(
+        obj_id=obj_id,
+        session=session,
     )
-    if wish is None:
+    if obj is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=WISH_NOT_EXISTS_EXCEPTION,
+            detail=exception,
         )
-    return wish
+    return obj
 
 
 async def check_wish_not_completed_or_reserved(
@@ -49,9 +65,7 @@ async def check_wish_not_completed_or_reserved(
     # Проверка в таблице бронирований
     was_reserved = await session.execute(
         select(Reservation).where(
-             Reservation.wish_id == wish_id,
-        )
-    )
+             Reservation.wish_id == wish_id))
 
     if was_reserved.scalars().first() is not None:
         raise HTTPException(
@@ -61,22 +75,18 @@ async def check_wish_not_completed_or_reserved(
 
     # Проверка в таблице пожеланий
     fields = await session.execute(
-        select(
-            Wish.reserved,
-            Wish.completed,
-        ).where(
-            Wish.id == wish_id,
-        )
+        select(Wish.reserved, Wish.completed,
+               ).where(Wish.id == wish_id)
     )
     fields = fields.all()
     fields = dict(fields[0])
 
-    if fields['reserved'] is not False:
+    if fields[SWITCH_FIELD_RESERVED] is not False:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=WISH_ALREADY_RESERVED,
         )
-    if fields['completed'] is not False:
+    if fields[SWITCH_FIELD_COMPLETED] is not False:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=WISH_ALREADY_COMPLETED,
