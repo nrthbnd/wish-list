@@ -21,21 +21,7 @@ class CRUDWish(CRUDBase):
                 Wish.name == wish_name
             )
         )
-        db_wish_id = db_wish_id.scalars().first()
-        return db_wish_id
-
-    async def get_wish_by_id(
-            self,
-            wish_id: int,
-            session: AsyncSession,
-    ) -> Optional[Wish]:
-        """Получить пожелание по id."""
-        db_wish = await session.execute(
-            select(Wish).where(
-                Wish.id == wish_id,
-            )
-        )
-        return db_wish.scalars().first()
+        return db_wish_id.scalars().first()
 
 
 wish_crud = CRUDWish(Wish)
