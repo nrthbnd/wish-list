@@ -3,10 +3,8 @@ from typing import Optional
 
 from pydantic import BaseModel, Extra, Field, validator
 
-from constants import (
-    WISH_NAME_MIN_LEN, WISH_NAME_MAX_LEN,
-    CREATE_DATE,
-)
+from constants import (WISH_NAME_MIN_LEN, WISH_NAME_MAX_LEN,
+                       CREATE_DATE, EMPTY_FIELD_ERROR)
 
 
 class WishBase(BaseModel):
@@ -39,9 +37,7 @@ class WishUpdate(WishBase):
     @validator('name')
     def field_cannot_be_null(cls, value, field):
         if value is None:
-            raise ValueError(
-                f'Поле {field.name} не может быть пустым!'
-            )
+            raise ValueError(EMPTY_FIELD_ERROR.format(field.name))
         return value
 
 
