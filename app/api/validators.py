@@ -31,7 +31,7 @@ async def check_before_delete(
 ):
     """Проверить, можено ли удалять пожелание."""
     wish = await wish_crud.get(wish_id, session)
-    if wish.reserved is True:
+    if wish.reserved and not wish.completed:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=NOT_ALLOWED_TO_DELETE_WISH,
