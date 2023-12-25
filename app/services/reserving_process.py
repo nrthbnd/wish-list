@@ -10,7 +10,7 @@ from constants import SWITCH_FIELD_COMPLETED
 async def change_wish_status(
     wish: Wish,
     field_to_switch: str,
-    new_reservation: bool,
+    new_reservation_flag: bool,
     session: AsyncSession,
 ):
     """Изменить статус пожелания."""
@@ -18,7 +18,7 @@ async def change_wish_status(
     new_value = not current_value
     setattr(wish, field_to_switch, new_value)
 
-    if new_reservation is False:
+    if new_reservation_flag is False:
         reservation = await reservation_crud.get_reservation_by_wish_id(
             wish.id, session,
         )
