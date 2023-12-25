@@ -106,7 +106,7 @@ async def change_wish_completed_status(
     await change_wish_status(
         wish=wish,
         field_to_switch=SWITCH_FIELD_COMPLETED,
-        new_reservation=False,
+        new_reservation_flag=False,
         session=session,
     )
     return wish
