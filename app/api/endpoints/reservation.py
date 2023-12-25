@@ -37,7 +37,7 @@ async def create_reservation(
     await change_wish_status(
         wish=wish,
         field_to_switch=SWITCH_FIELD_RESERVED,
-        new_reservation=True,
+        new_reservation_flag=True,
         session=session,
     )
     return await reservation_crud.create(reservation, session)
@@ -76,3 +76,29 @@ async def partially_update_reservation(
     return await reservation_crud.update(
         reservation, obj_in, session,
     )
+
+
+@router.delete(
+    RESERVATION_ID_ROUTE,
+    response_model=ReservationDB,
+    # dependencies=[Depends(current_superuser)],
+)
+async def remove_reservation(
+    reservation_id: int,
+    session: AsyncSession = Depends(get_async_session),
+):
+    """Удалить бронирование (Только для суперюзеров и хозяина)."""
+    reservation = await check_obj_exists(
+        obj_id=reservation_id,
+        model_crud=reservation_crud,
+        exception=RESERVATION_NOT_EXISTS_EXCEPTION,
+        session=session,
+    )
+    wish = await wish_crud.get(reservation.wish_id, session)
+    await change_wish_status(
+        wish=wish,
+        field_to_switch=SWITCH_FIELD_RESERVED,
+        new_reservation_flag=True,
+        session=session,
+    )
+    return await reservation_crud.remove(reservation, session)
