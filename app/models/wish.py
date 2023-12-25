@@ -1,9 +1,12 @@
 from sqlalchemy import Boolean, Column, String
+from sqlalchemy.orm import relationship
 
 from constants import (
     COMPLETED_DEFAULT,
     RESERVED_DEFAULT,
     WISH_NAME_MAX_LEN,
+    LINK_URL_MAX_LEN,
+    LINK_URL_DEFAULT,
 )
 from app.models.custombase import CustomBase
 
@@ -23,3 +26,9 @@ class Wish(CustomBase):
         Boolean,
         default=RESERVED_DEFAULT,
     )
+    wish_link = Column(
+        String(LINK_URL_MAX_LEN),
+        nullable=True,
+        default=LINK_URL_DEFAULT,
+    )
+    reservation = relationship('Reservation', cascade='delete')
