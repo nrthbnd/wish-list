@@ -62,7 +62,7 @@ async def remove_wish(
     wish_id: int,
     session: AsyncSession = Depends(get_async_session),
 ):
-    """Удалить пожелание (Только для суперюзеров)."""
+    """Удалить пожелание (Только для суперюзеров и авторов)."""
     wish = await check_obj_exists(
         obj_id=wish_id,
         model_crud=wish_crud,

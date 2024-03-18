@@ -1,8 +1,7 @@
 from datetime import datetime
 
 # core/config
-APP_TITLE = 'Поддержка котиков QRKot'
-DATABASE_URL = 'sqlite+aiosqlite:///./fastapi.db'
+APP_TITLE = 'Приложение для создания списка пожеланий'
 SECRET = 'SECRET'
 ENV_FILE_NAME = '.env'
 

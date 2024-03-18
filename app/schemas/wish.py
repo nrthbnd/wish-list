@@ -18,6 +18,10 @@ class WishBase(BaseModel):
     comment: Optional[str] = Field(
         None,
     )
+    wish_link: Optional[str] = Field(
+        None,
+        max_length=LINK_URL_MAX_LEN,
+    )
 
     class Config:
         extra = Extra.forbid
@@ -30,10 +34,10 @@ class WishCreate(WishBase):
         min_length=WISH_NAME_MIN_LEN,
         max_length=WISH_NAME_MAX_LEN,
     )
-    wish_link: str = Field(
-        None,
-        max_length=LINK_URL_MAX_LEN,
-    )
+    # wish_link: str = Field(
+    #     None,
+    #     max_length=LINK_URL_MAX_LEN,
+    # )
 
 
 class WishUpdate(WishBase):
