@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: web
+      dockerfile: Dockerfile
+    env_file:
+      - web/.env
+    depends_on:
+      - db
+    volumes:
+      - ./web:/home/app/web
+    ports:
+      - "8001:8000"
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data/
+    env_file:
+      - .env.db
+
+volumes:
+  postgres_data_prod:

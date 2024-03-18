@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer
 
 from constants import WISH_ID_FOREIGN_KEY
-from app.models.custombase import CustomBase
+from models.custombase import CustomBase
 
 
 class Reservation(CustomBase):

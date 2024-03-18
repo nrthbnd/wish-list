@@ -4,6 +4,7 @@ from datetime import datetime
 APP_TITLE = 'Приложение для создания списка пожеланий'
 SECRET = 'SECRET'
 ENV_FILE_NAME = '.env'
+CHECK='mate1'
 
 # models/custombase
 CREATE_DATE_DEFAULT = datetime.utcnow

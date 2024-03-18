@@ -8,7 +8,7 @@ from constants import (
     LINK_URL_MAX_LEN,
     LINK_URL_DEFAULT,
 )
-from app.models.custombase import CustomBase
+from models.custombase import CustomBase
 
 
 class Wish(CustomBase):

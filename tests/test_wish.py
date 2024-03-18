@@ -1,8 +1,8 @@
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.crud.wish import CRUDWish
-from app.models.wish import Wish
+from web.crud.wish import CRUDWish
+from web.models.wish import Wish
 
 
 # @pytest.mark.asyncio

@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.validators import (check_name_duplicate, check_before_delete,
+from api.validators import (check_name_duplicate, check_before_delete,
                                 check_obj_exists)
-from app.core.db import get_async_session
-from app.crud.wish import wish_crud
-from app.services.reserving_process import change_wish_status
-from app.schemas.wish import WishCreate, WishDB, WishUpdate
+from core.db import get_async_session
+from crud.wish import wish_crud
+from services.reserving_process import change_wish_status
+from schemas.wish import WishCreate, WishDB, WishUpdate
 from constants import (WISH_NOT_EXISTS_EXCEPTION, CLEAR_ROUTE, WISH_ID_ROUTE,
-                       SWITCH_FIELD_COMPLETED)
+                           SWITCH_FIELD_COMPLETED)
 
 
 router = APIRouter()
