@@ -3,7 +3,7 @@ from sqlalchemy import Column, DateTime, Text
 from constants import (
     CREATE_DATE_DEFAULT, CLOSE_DATE_DEFAULT,
 )
-from app.core.db import Base
+from core.db import Base
 
 
 class CustomBase(Base):

@@ -4,8 +4,8 @@ from typing import Optional
 from pydantic import BaseModel, Extra, Field, validator
 
 from constants import (WISH_NAME_MIN_LEN, WISH_NAME_MAX_LEN,
-                       CREATE_DATE, EMPTY_FIELD_ERROR,
-                       LINK_URL_MAX_LEN)
+                           CREATE_DATE, EMPTY_FIELD_ERROR,
+                           LINK_URL_MAX_LEN)
 
 
 class WishBase(BaseModel):

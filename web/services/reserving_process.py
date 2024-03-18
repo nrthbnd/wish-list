@@ -2,8 +2,8 @@ from datetime import datetime
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models import Wish
-from app.crud.reservation import reservation_crud
+from models import Wish
+from crud.reservation import reservation_crud
 from constants import SWITCH_FIELD_COMPLETED
 
 

@@ -3,8 +3,8 @@ from typing import Optional
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.crud.base import CRUDBase
-from app.models.wish import Wish
+from crud.base import CRUDBase
+from models.wish import Wish
 
 
 class CRUDWish(CRUDBase):

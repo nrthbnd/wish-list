@@ -4,25 +4,25 @@ import pytest
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
-# from app.core.db import Base
+# from web.core.db import Base
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 try:
-    from app.main import app  # noqa
+    from web.main import app  # noqa
 except (NameError, ImportError):
     raise AssertionError(
-        'Не обнаружен объект приложения `app`. '
-        'Проверьте и поправьте: он должен быть доступен в модуле `app.main`.',
+        'Не обнаружен объект приложения `web`. '
+        'Проверьте и поправьте: он должен быть доступен в модуле `web.main`.',
     )
 
 try:
-    from app.core.db import Base  # noqa
+    from web.core.db import Base  # noqa
 except (NameError, ImportError):
     raise AssertionError(
         'Не обнаружен объект `Base`. '
         'Проверьте и поправьте: они должны быть доступны в модуле '
-        '`app.core.db`.',
+        '`web.core.db`.',
     )
 
 DB_USER = "test_postgres"

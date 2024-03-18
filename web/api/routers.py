@@ -4,7 +4,7 @@ from constants import (
     WISH_ROUTER_PREFIX, WISH_ROUTER_TAG,
     RES_ROUTER_PREFIX, RES_ROUTER_TAG,
 )
-from app.api.endpoints import (
+from api.endpoints import (
     wish_router, reservation_router,
 )
 

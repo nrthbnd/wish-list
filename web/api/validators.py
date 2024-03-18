@@ -3,11 +3,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from constants import (NAME_DUPLICATE_EXCEPTION,
-                       WISH_ALREADY_RESERVED, WISH_ALREADY_COMPLETED,
-                       NOT_ALLOWED_TO_DELETE_WISH, SWITCH_FIELD_COMPLETED,
-                       SWITCH_FIELD_RESERVED)
-from app.crud.wish import wish_crud
-from app.models import Wish, Reservation
+                           WISH_ALREADY_RESERVED, WISH_ALREADY_COMPLETED,
+                           NOT_ALLOWED_TO_DELETE_WISH, SWITCH_FIELD_COMPLETED,
+                           SWITCH_FIELD_RESERVED)
+from crud.wish import wish_crud
+from models import Wish, Reservation
 
 
 async def check_name_duplicate(
