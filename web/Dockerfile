@@ -18,14 +18,13 @@ ENV PYTHONPATH=/home/app/web
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
-
+#RUN chmod a+x ./entrypoint.sh
 # add app
 COPY . .
 
 # add entrypoint.sh
 #COPY ./entrypoint.sh .
-RUN chmod a+x /home/app/web/entrypoint.sh
-
+RUN chmod +x /home/app/web/entrypoint.sh
 
 # run entrypoint.sh
 ENTRYPOINT ["/home/app/web/entrypoint.sh"]
