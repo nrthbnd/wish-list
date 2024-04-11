@@ -11,4 +11,4 @@ class Reservation(CustomBase):
         ForeignKey(WISH_ID_FOREIGN_KEY),
         unique=True,
     )
-    # user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))

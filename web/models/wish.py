@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, String
+from sqlalchemy import Boolean, Column, String, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
 from constants import (
@@ -32,3 +32,4 @@ class Wish(CustomBase):
         default=LINK_URL_DEFAULT,
     )
     reservation = relationship('Reservation', cascade='delete')
+    user_id = Column(Integer, ForeignKey('user.id'))

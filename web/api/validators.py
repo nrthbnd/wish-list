@@ -3,11 +3,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from constants import (NAME_DUPLICATE_EXCEPTION,
-                           WISH_ALREADY_RESERVED, WISH_ALREADY_COMPLETED,
-                           NOT_ALLOWED_TO_DELETE_WISH, SWITCH_FIELD_COMPLETED,
-                           SWITCH_FIELD_RESERVED)
+                       WISH_ALREADY_RESERVED, WISH_ALREADY_COMPLETED,
+                       NOT_ALLOWED_TO_DELETE_WISH, SWITCH_FIELD_COMPLETED,
+                       SWITCH_FIELD_RESERVED)
 from crud.wish import wish_crud
-from models import Wish, Reservation
+from models import Wish, Reservation, User
 
 
 async def check_name_duplicate(
@@ -91,3 +91,17 @@ async def check_wish_not_completed_or_reserved(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=WISH_ALREADY_COMPLETED,
         )
+
+
+async def check_author_before_edit(
+    obj,
+    user: User,
+    exception: str,
+):
+    """Проверить, выполняется ли действие автором объекта."""
+    if obj.user_id != user.id and not user.is_superuser:
+        raise HTTPException(
+            status_code=403,
+            detail=exception,
+        )
+    return obj

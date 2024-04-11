@@ -2,9 +2,7 @@ from datetime import datetime
 
 # core/config
 APP_TITLE = 'Приложение для создания списка пожеланий'
-SECRET = 'SECRET'
 ENV_FILE_NAME = '.env'
-CHECK='mate1'
 
 # models/custombase
 CREATE_DATE_DEFAULT = datetime.utcnow
@@ -32,6 +30,8 @@ WISH_ALREADY_RESERVED = 'Это пожелание уже забронирова
 WISH_ALREADY_COMPLETED = 'Это пожелание уже выполнено!'
 RESERVATION_NOT_EXISTS_EXCEPTION = 'Бронирование не найдено!'
 NOT_ALLOWED_TO_DELETE_WISH = 'Нельзя удалять забронированное пожелание!'
+NOT_ALLOWED_TO_RESERVATION = 'Данное действие доступно только владельцу объекта бронирования!'
+NOT_ALLOWED_TO_WISH = 'Данное действие доступно только владельцу объекта пожелания!'
 
 # api/routers
 WISH_ROUTER_PREFIX = '/wishes'

@@ -35,7 +35,7 @@ class ReservationDB(ReservationBase):
         example=CREATE_DATE,
     )
     close_date: Optional[datetime]
-    # user_id: Optional[int]
+    user_id: int
 
     class Config:
         orm_mode = True

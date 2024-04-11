@@ -5,7 +5,7 @@ from constants import (
     RES_ROUTER_PREFIX, RES_ROUTER_TAG,
 )
 from api.endpoints import (
-    wish_router, reservation_router,
+    wish_router, reservation_router, user_router,
 )
 
 main_router = APIRouter()
@@ -20,3 +20,5 @@ main_router.include_router(
     prefix=RES_ROUTER_PREFIX,
     tags=[RES_ROUTER_TAG],
 )
+
+main_router.include_router(user_router)

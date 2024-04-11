@@ -4,8 +4,8 @@ from typing import Optional
 from pydantic import BaseModel, Extra, Field, validator
 
 from constants import (WISH_NAME_MIN_LEN, WISH_NAME_MAX_LEN,
-                           CREATE_DATE, EMPTY_FIELD_ERROR,
-                           LINK_URL_MAX_LEN)
+                       CREATE_DATE, EMPTY_FIELD_ERROR,
+                       LINK_URL_MAX_LEN)
 
 
 class WishBase(BaseModel):
@@ -34,10 +34,6 @@ class WishCreate(WishBase):
         min_length=WISH_NAME_MIN_LEN,
         max_length=WISH_NAME_MAX_LEN,
     )
-    # wish_link: str = Field(
-    #     None,
-    #     max_length=LINK_URL_MAX_LEN,
-    # )
 
 
 class WishUpdate(WishBase):
@@ -53,6 +49,7 @@ class WishUpdate(WishBase):
 class WishDB(WishCreate):
     """Схема пожелания в БД."""
     id: int
+    user_id: int
     create_date: datetime = Field(
         ...,
         example=CREATE_DATE,
