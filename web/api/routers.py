@@ -3,9 +3,10 @@ from fastapi import APIRouter
 from constants import (
     WISH_ROUTER_PREFIX, WISH_ROUTER_TAG,
     RES_ROUTER_PREFIX, RES_ROUTER_TAG,
+    PAGES_ROUTER_PREFIX, PAGES_ROUTER_TAG,
 )
 from api.endpoints import (
-    wish_router, reservation_router, user_router,
+    wish_router, pages_router, reservation_router, user_router,
 )
 
 main_router = APIRouter()
@@ -22,3 +23,9 @@ main_router.include_router(
 )
 
 main_router.include_router(user_router)
+
+main_router.include_router(
+    pages_router,
+    prefix=PAGES_ROUTER_PREFIX,
+    tags=[PAGES_ROUTER_TAG],
+)

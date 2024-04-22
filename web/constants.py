@@ -38,6 +38,10 @@ WISH_ROUTER_PREFIX = '/wishes'
 WISH_ROUTER_TAG = 'Wishes'
 RES_ROUTER_PREFIX = '/reservations'
 RES_ROUTER_TAG = 'Reservations'
+PAGES_ROUTER_PREFIX = '/pages'
+PAGES_ROUTER_TAG = 'Pages'
+USERS_ROUTER_PREFIX = '/users'
+USERS_ROUTER_TAG = 'users'
 
 # api/endpoints/wish
 CLEAR_ROUTE = '/'
@@ -47,3 +51,7 @@ SWITCH_FIELD_COMPLETED = 'completed'
 # api/endpoints/reservation
 RESERVATION_ID_ROUTE = '/{reservation_id}'
 SWITCH_FIELD_RESERVED = 'reserved'
+
+# api/endpoints/users
+USER_WISHES = '/users/{id}/wishes'
+USER_NAME = 'users/{id}/info'

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 style="background-color: lavender; padding: 10px; border-radius: 10px; text-align: center; font-size: 1.5em; font-weight: 500;">
+        Вишлист пользователя {{ username }}
+    </h2>
+    <br>
+    <ul>
+        <li>
+            <span style="font-weight: bold;">Пожелание</span>
+            <span style="font-weight: bold;">Комментарий</span>
+            <span style="font-weight: bold;">Ссылка</span>
+            <span style="font-weight: bold;">Бронировать</span>
+        </li>
+        {% for wish in wishes %}
+        <li>
+            <span>{{ wish.name }}</span>
+            <span>{{ wish.comment or "" }}</span>
+            <span>{{ wish.wish_link or "" }}</span>
+            <input type="checkbox" data-wish-id="{{ wish.id }}" {% if wish.reserved %}checked{% endif %}>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<script>
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', async (event) => {
+            const wishId = event.target.dataset.wishId;
+            const isChecked = event.target.checked;
+            if (isChecked) {
+                // Отправить запрос на бронирование пожелания
+                await fetch(`/create_reservation/${wishId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ wish_id: wishId })
+                });
+            } else {
+                // Отправить запрос на удаление бронирования
+                await fetch(`/remove_reservation/${wishId}`, {
+                    method: 'DELETE'
+                });
+            }
+        });
+    });
+</script>
+
+{% endblock %}
